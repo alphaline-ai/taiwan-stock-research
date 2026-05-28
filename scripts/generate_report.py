@@ -15,7 +15,7 @@ from jinja2 import Environment, FileSystemLoader
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 TEMPLATES_DIR = ROOT / "templates"
-OUTPUT_DIR = ROOT / "output"
+OUTPUT_DIR = ROOT / "docs"
 HISTORY_FILE = DATA_DIR / "history.json"
 
 sys.path.insert(0, str(ROOT / "scripts"))

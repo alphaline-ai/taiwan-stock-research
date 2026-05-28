@@ -29,7 +29,7 @@ python scripts/fetch_data.py
 
 # 渲染報告
 python scripts/generate_report.py
-open output/index.html
+open docs/index.html
 ```
 
 ## 自動化
@@ -38,8 +38,8 @@ open output/index.html
 
 1. `python scripts/fetch_data.py`
 2. `python scripts/generate_report.py`
-3. commit `data/history.json` + `output/*` 回 `main`
-4. GitHub Pages 自動發布到 `/output`
+3. commit `data/history.json` + `docs/*` 回 `main`
+4. GitHub Pages 自動發布 `/docs` 資料夾
 
 可在 Actions tab 用 `workflow_dispatch` 手動觸發。
 
@@ -54,8 +54,8 @@ templates/
   report.html.j2       # Jinja2 模板（深色主題、inline CSS）
 data/
   history.json         # 累積快照（git tracked）
-output/
-  index.html           # GH Pages serve
+docs/
+  index.html           # GH Pages serve (main / /docs)
   summary.json         # 機器可讀摘要
 ```
 
