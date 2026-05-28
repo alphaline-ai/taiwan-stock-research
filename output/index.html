@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taiwan Stock Research · 2026-05-28</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:         #0b1020;
+      --panel:      #131a30;
+      --panel-2:    #1a2240;
+      --border:     #243056;
+      --text:       #e6ebff;
+      --text-dim:   #8a93b8;
+      --text-mute:  #5a6391;
+      --accent:     #6ee7b7;
+      --accent-2:   #93c5fd;
+      --warn:       #fbbf24;
+      --danger:     #f87171;
+      --layer-0:    #6b7280;   /* equipment — slate  */
+      --layer-1:    #60a5fa;   /* shortage  — blue   */
+      --layer-2:    #a78bfa;   /* HBM/DRAM  — purple */
+      --layer-3:    #34d399;   /* TW DRAM   — green  */
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+    /* Header */
+    header { margin-bottom: 2.5rem; }
+    header .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      margin-bottom: 0.5rem;
+    }
+    header h1 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem;
+    }
+    header .meta { color: var(--text-dim); font-size: 0.875rem; }
+    header .meta span { font-family: var(--mono); color: var(--text); }
+
+    /* Summary cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+    }
+    .card .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+    .card .value {
+      font-family: var(--mono);
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .card .hint { font-size: 0.8125rem; color: var(--text-mute); margin-top: 0.25rem; }
+    .card.featured { background: linear-gradient(135deg, #1a2240 0%, #1e2a52 100%); border-color: #2f3c6b; }
+    .card.featured .value { color: var(--accent); }
+
+    /* Section heading */
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .section-head h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .section-head .sub { color: var(--text-mute); font-size: 0.8125rem; }
+
+    /* Table */
+    .table-wrap {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 0.875rem 1rem;
+      background: var(--panel-2);
+      border-bottom: 1px solid var(--border);
+    }
+    thead th.num { text-align: right; }
+    tbody td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(36, 48, 86, 0.6);
+      font-size: 0.875rem;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(26, 34, 64, 0.5); }
+    td.ticker {
+      font-family: var(--mono);
+      font-weight: 500;
+      border-left: 4px solid var(--layer-0);
+      padding-left: 0.75rem;
+    }
+    tr.layer-1 td.ticker { border-left-color: var(--layer-1); }
+    tr.layer-2 td.ticker { border-left-color: var(--layer-2); }
+    tr.layer-3 td.ticker { border-left-color: var(--layer-3); }
+    td.name { color: var(--text-dim); }
+    td.num { font-family: var(--mono); text-align: right; color: var(--text); }
+    td.num.muted { color: var(--text-mute); }
+    .layer-tag {
+      display: inline-block;
+      font-size: 0.6875rem;
+      font-family: var(--mono);
+      padding: 0.125rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(96, 165, 250, 0.12);
+      color: var(--layer-1);
+    }
+    tr.layer-0 .layer-tag { background: rgba(107, 114, 128, 0.18); color: var(--layer-0); }
+    tr.layer-2 .layer-tag { background: rgba(167, 139, 250, 0.15); color: var(--layer-2); }
+    tr.layer-3 .layer-tag { background: rgba(52, 211, 153, 0.15); color: var(--layer-3); }
+
+    /* Signals */
+    .signals {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+    }
+    .signals ul { list-style: none; margin: 0; padding: 0; }
+    .signals li {
+      padding: 0.625rem 0;
+      border-bottom: 1px solid rgba(36, 48, 86, 0.5);
+      font-size: 0.9375rem;
+      color: var(--text);
+    }
+    .signals li:last-child { border-bottom: none; }
+    .signals li.empty { color: var(--text-mute); font-style: italic; }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-mute);
+      font-size: 0.8125rem;
+    }
+    footer a { color: var(--accent-2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .container { padding: 1.5rem 1rem 3rem; }
+      header h1 { font-size: 1.5rem; }
+      .card .value { font-size: 1.625rem; }
+      thead th, tbody td { padding: 0.625rem 0.5rem; font-size: 0.8125rem; }
+      td.layer-cell { display: none; }
+      thead th.layer-cell { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <div class="eyebrow">Taiwan AI / Semi Research</div>
+      <h1>Stock Research Dashboard</h1>
+      <div class="meta">
+        Report: <span>2026-05-28</span> &nbsp;·&nbsp;
+        Data as of: <span>2026-05-28</span> &nbsp;·&nbsp;
+        Tracking <span>16</span> tickers
+      </div>
+    </header>
+
+    <!-- Summary Cards -->
+    <div class="cards">
+      <div class="card">
+        <div class="label">設備平均 Fwd PE</div>
+        <div class="value">35.2</div>
+        <div class="hint">ASML / AMAT / LRCX / KLAC</div>
+      </div>
+      <div class="card">
+        <div class="label">DRAM 大廠平均 Fwd PE</div>
+        <div class="value">6.8</div>
+        <div class="hint">Hynix / Samsung / Micron</div>
+      </div>
+      <div class="card featured">
+        <div class="label">設備 ÷ DRAM PE Ratio</div>
+        <div class="value">5.16x</div>
+        <div class="hint">核心觀察指標 · 比值收斂 = DRAM catch-up</div>
+      </div>
+      <div class="card">
+        <div class="label">台灣 DRAM Fwd PE</div>
+        <div class="value">20.0</div>
+        <div class="hint">Nanya / Winbond</div>
+      </div>
+    </div>
+
+    <!-- Valuation Table -->
+    <div class="section-head">
+      <h2>Valuation Snapshot</h2>
+      <div class="sub">Layer 0 設備 · 1 短缺台廠 · 2 HBM/DRAM · 3 台灣 DRAM</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Name</th>
+            <th class="layer-cell">Layer</th>
+            <th class="num">Price</th>
+            <th class="num">Fwd PE</th>
+            <th class="num">TTM PE</th>
+            <th class="num">Mkt Cap (B)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr class="layer-0">
+            <td class="ticker">AMAT</td>
+            <td class="name">Applied Materials</td>
+            <td class="layer-cell"><span class="layer-tag">L0</span></td>
+            <td class="num">448.25</td>
+            <td class="num ">27.7</td>
+            <td class="num ">42.2</td>
+            <td class="num ">355.9</td>
+          </tr>
+          
+          <tr class="layer-0">
+            <td class="ticker">ASML</td>
+            <td class="name">ASML</td>
+            <td class="layer-cell"><span class="layer-tag">L0</span></td>
+            <td class="num">1597.87</td>
+            <td class="num ">33.6</td>
+            <td class="num ">53.2</td>
+            <td class="num ">615.8</td>
+          </tr>
+          
+          <tr class="layer-0">
+            <td class="ticker">KLAC</td>
+            <td class="name">KLA</td>
+            <td class="layer-cell"><span class="layer-tag">L0</span></td>
+            <td class="num">1957.19</td>
+            <td class="num ">39.3</td>
+            <td class="num ">55.5</td>
+            <td class="num ">255.7</td>
+          </tr>
+          
+          <tr class="layer-0">
+            <td class="ticker">LRCX</td>
+            <td class="name">Lam Research</td>
+            <td class="layer-cell"><span class="layer-tag">L0</span></td>
+            <td class="num">318.93</td>
+            <td class="num ">40.2</td>
+            <td class="num ">60.3</td>
+            <td class="num ">398.8</td>
+          </tr>
+          
+          <tr class="layer-1">
+            <td class="ticker">2303.TW</td>
+            <td class="name">UMC</td>
+            <td class="layer-cell"><span class="layer-tag">L1</span></td>
+            <td class="num">142.00</td>
+            <td class="num ">27.5</td>
+            <td class="num ">36.0</td>
+            <td class="num ">1781.6</td>
+          </tr>
+          
+          <tr class="layer-1">
+            <td class="ticker">2330.TW</td>
+            <td class="name">TSMC</td>
+            <td class="layer-cell"><span class="layer-tag">L1</span></td>
+            <td class="num">2295.00</td>
+            <td class="num ">18.7</td>
+            <td class="num ">31.2</td>
+            <td class="num ">59514.8</td>
+          </tr>
+          
+          <tr class="layer-1">
+            <td class="ticker">2383.TW</td>
+            <td class="name">Elite (台光)</td>
+            <td class="layer-cell"><span class="layer-tag">L1</span></td>
+            <td class="num">5055.00</td>
+            <td class="num ">33.0</td>
+            <td class="num ">109.5</td>
+            <td class="num ">1811.3</td>
+          </tr>
+          
+          <tr class="layer-1">
+            <td class="ticker">2454.TW</td>
+            <td class="name">MediaTek</td>
+            <td class="layer-cell"><span class="layer-tag">L1</span></td>
+            <td class="num">4410.00</td>
+            <td class="num ">37.3</td>
+            <td class="num ">66.9</td>
+            <td class="num ">7038.8</td>
+          </tr>
+          
+          <tr class="layer-1">
+            <td class="ticker">3037.TW</td>
+            <td class="name">Unimicron</td>
+            <td class="layer-cell"><span class="layer-tag">L1</span></td>
+            <td class="num">1025.00</td>
+            <td class="num ">34.8</td>
+            <td class="num ">237.3</td>
+            <td class="num ">1613.9</td>
+          </tr>
+          
+          <tr class="layer-1">
+            <td class="ticker">3443.TW</td>
+            <td class="name">GUC (創意)</td>
+            <td class="layer-cell"><span class="layer-tag">L1</span></td>
+            <td class="num">4590.00</td>
+            <td class="num ">51.7</td>
+            <td class="num ">163.6</td>
+            <td class="num ">615.1</td>
+          </tr>
+          
+          <tr class="layer-1">
+            <td class="ticker">3711.TW</td>
+            <td class="name">ASE</td>
+            <td class="layer-cell"><span class="layer-tag">L1</span></td>
+            <td class="num">627.00</td>
+            <td class="num ">26.9</td>
+            <td class="num ">61.4</td>
+            <td class="num ">2751.2</td>
+          </tr>
+          
+          <tr class="layer-2">
+            <td class="ticker">000660.KS</td>
+            <td class="name">SK Hynix</td>
+            <td class="layer-cell"><span class="layer-tag">L2</span></td>
+            <td class="num">2278000.00</td>
+            <td class="num ">6.0</td>
+            <td class="num muted">—</td>
+            <td class="num ">1617049.5</td>
+          </tr>
+          
+          <tr class="layer-2">
+            <td class="ticker">005930.KS</td>
+            <td class="name">Samsung</td>
+            <td class="layer-cell"><span class="layer-tag">L2</span></td>
+            <td class="num">300500.00</td>
+            <td class="num ">5.7</td>
+            <td class="num muted">—</td>
+            <td class="num ">1973252.3</td>
+          </tr>
+          
+          <tr class="layer-2">
+            <td class="ticker">MU</td>
+            <td class="name">Micron</td>
+            <td class="layer-cell"><span class="layer-tag">L2</span></td>
+            <td class="num">928.41</td>
+            <td class="num ">8.9</td>
+            <td class="num ">42.2</td>
+            <td class="num ">1047.0</td>
+          </tr>
+          
+          <tr class="layer-3">
+            <td class="ticker">2344.TW</td>
+            <td class="name">Winbond (華邦電)</td>
+            <td class="layer-cell"><span class="layer-tag">L3</span></td>
+            <td class="num">144.00</td>
+            <td class="num ">6.3</td>
+            <td class="num ">163.6</td>
+            <td class="num ">648.0</td>
+          </tr>
+          
+          <tr class="layer-3">
+            <td class="ticker">2409.TW</td>
+            <td class="name">Nanya (南亞科)</td>
+            <td class="layer-cell"><span class="layer-tag">L3</span></td>
+            <td class="num">21.20</td>
+            <td class="num ">33.7</td>
+            <td class="num ">23.6</td>
+            <td class="num ">160.0</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Signals -->
+    <div class="section-head">
+      <h2>Signals</h2>
+      <div class="sub">自動偵測 · 每週更新</div>
+    </div>
+    <div class="signals">
+      <ul>
+        
+          <li>🟠 台灣 DRAM 溢價 193%（罕見訊號）</li><li>📥 本週成功取得 16 檔即時報價，其中 16 檔有 Forward PE 數據</li>
+        
+      </ul>
+    </div>
+
+    <footer>
+      Data: <a href="https://finance.yahoo.com" target="_blank">Yahoo Finance</a> via yfinance ·
+      Source: <a href="https://github.com/howardpen9/taiwan-stock-research" target="_blank">github.com/howardpen9/taiwan-stock-research</a> ·
+      <em>For research only. Not investment advice.</em>
+    </footer>
+
+  </div>
+</body>
+</html>
