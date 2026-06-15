@@ -10246,5 +10246,188 @@
         "revenue_growth": 0.913
       }
     }
+  },
+  {
+    "snapshot_date": "2026-06-15",
+    "timestamp": "2026-06-15T06:13:51.745877+00:00",
+    "kind": "weekly",
+    "prices": {
+      "ASML": {
+        "price": 1863.55,
+        "currency": "USD",
+        "market_cap": 718245134336,
+        "forward_pe": 38.83,
+        "trailing_pe": 62.49,
+        "peg_ratio": 2.75,
+        "eps_ttm": 29.82,
+        "eps_forward": 47.98891,
+        "revenue_growth": 0.132
+      },
+      "AMAT": {
+        "price": 567.25,
+        "currency": "USD",
+        "market_cap": 450373484544,
+        "forward_pe": 34.89,
+        "trailing_pe": 53.46,
+        "peg_ratio": 1.89,
+        "eps_ttm": 10.61,
+        "eps_forward": 16.26023,
+        "revenue_growth": 0.114
+      },
+      "LRCX": {
+        "price": 366.81,
+        "currency": "USD",
+        "market_cap": 458721951744,
+        "forward_pe": 46.04,
+        "trailing_pe": 69.47,
+        "peg_ratio": 2.14,
+        "eps_ttm": 5.28,
+        "eps_forward": 7.96681,
+        "revenue_growth": 0.238
+      },
+      "KLAC": {
+        "price": 254.54,
+        "currency": "USD",
+        "market_cap": 332499288064,
+        "forward_pe": 50.43,
+        "trailing_pe": 71.9,
+        "peg_ratio": 2.67,
+        "eps_ttm": 3.54,
+        "eps_forward": 5.04728,
+        "revenue_growth": 0.115
+      },
+      "2330.TW": {
+        "price": 2375.0,
+        "currency": "TWD",
+        "market_cap": 61589378039808,
+        "forward_pe": 19.35,
+        "trailing_pe": 32.23,
+        "peg_ratio": 1.14,
+        "eps_ttm": 73.69,
+        "eps_forward": 122.73307,
+        "revenue_growth": 0.351
+      },
+      "2454.TW": {
+        "price": 4470.0,
+        "currency": "TWD",
+        "market_cap": 7134612815872,
+        "forward_pe": 37.22,
+        "trailing_pe": 67.69,
+        "peg_ratio": 2.03,
+        "eps_ttm": 66.04,
+        "eps_forward": 120.08395,
+        "revenue_growth": -0.027
+      },
+      "2303.TW": {
+        "price": 141.5,
+        "currency": "TWD",
+        "market_cap": 1775320432640,
+        "forward_pe": 26.39,
+        "trailing_pe": 35.91,
+        "peg_ratio": 1.57,
+        "eps_ttm": 3.94,
+        "eps_forward": 5.36179,
+        "revenue_growth": 0.055
+      },
+      "3711.TW": {
+        "price": 590.0,
+        "currency": "TWD",
+        "market_cap": 2588856025088,
+        "forward_pe": 24.49,
+        "trailing_pe": 57.79,
+        "peg_ratio": 0.99,
+        "eps_ttm": 10.21,
+        "eps_forward": 24.09575,
+        "revenue_growth": 0.172
+      },
+      "3037.TW": {
+        "price": 960.0,
+        "currency": "TWD",
+        "market_cap": 1511179943936,
+        "forward_pe": 32.5,
+        "trailing_pe": 221.71,
+        "peg_ratio": 1.45,
+        "eps_ttm": 4.33,
+        "eps_forward": 29.54162,
+        "revenue_growth": 0.245
+      },
+      "2383.TW": {
+        "price": 5030.0,
+        "currency": "TWD",
+        "market_cap": 1802354556928,
+        "forward_pe": 32.16,
+        "trailing_pe": 109.61,
+        "peg_ratio": 0.23,
+        "eps_ttm": 45.89,
+        "eps_forward": 156.42165,
+        "revenue_growth": 0.525
+      },
+      "3443.TW": {
+        "price": 4815.0,
+        "currency": "TWD",
+        "market_cap": 645262934016,
+        "forward_pe": 53.69,
+        "trailing_pe": 171.78,
+        "peg_ratio": 0.5,
+        "eps_ttm": 28.03,
+        "eps_forward": 89.68361,
+        "revenue_growth": 0.63
+      },
+      "000660.KS": {
+        "price": 2283000.0,
+        "currency": "KRW",
+        "market_cap": 1620598803398656,
+        "forward_pe": 5.56,
+        "trailing_pe": null,
+        "peg_ratio": 3.04,
+        "eps_ttm": null,
+        "eps_forward": null,
+        "revenue_growth": 1.981
+      },
+      "005930.KS": {
+        "price": 334750.0,
+        "currency": "KRW",
+        "market_cap": 2198157014335488,
+        "forward_pe": 5.83,
+        "trailing_pe": null,
+        "peg_ratio": 0.38,
+        "eps_ttm": null,
+        "eps_forward": null,
+        "revenue_growth": 0.692
+      },
+      "MU": {
+        "price": 981.61,
+        "currency": "USD",
+        "market_cap": 1106994921472,
+        "forward_pe": 8.75,
+        "trailing_pe": 46.3,
+        "peg_ratio": 0.34,
+        "eps_ttm": 21.2,
+        "eps_forward": 112.16951,
+        "revenue_growth": 1.963
+      },
+      "2409.TW": {
+        "price": 24.1,
+        "currency": "TWD",
+        "market_cap": 181885091840,
+        "forward_pe": 38.79,
+        "trailing_pe": 26.78,
+        "peg_ratio": 0.13,
+        "eps_ttm": 0.9,
+        "eps_forward": 0.62123,
+        "revenue_growth": -0.043
+      },
+      "2344.TW": {
+        "price": 189.0,
+        "currency": "TWD",
+        "market_cap": 850500059136,
+        "forward_pe": 7.15,
+        "trailing_pe": 214.77,
+        "peg_ratio": null,
+        "eps_ttm": 0.88,
+        "eps_forward": 26.42643,
+        "revenue_growth": 0.913
+      }
+    }
   }
 ]
