@@ -1,16 +1,16 @@
 {
-  "report_date": "2026-07-06",
-  "data_as_of": "2026-07-06",
-  "total_stocks": 16,
+  "report_date": "2026-07-13",
+  "data_as_of": "2026-07-13",
+  "total_stocks": 15,
   "summary_cards": {
-    "equip_fpe": 40.695,
-    "dram_fpe": 5.623333333333332,
-    "tw_dram_fpe": 27.595,
-    "pe_ratio": 7.23681090693539
+    "equip_fpe": 41.56333333333333,
+    "dram_fpe": 5.066666666666666,
+    "tw_dram_fpe": 25.58,
+    "pe_ratio": 8.20328947368421
   },
   "signals": [
-    "🟠 台灣 DRAM 溢價 391%（罕見訊號）",
-    "💎 TSMC 週漲跌 ↑ +4.4% (NT$2480)",
-    "📥 本週成功取得 16 檔即時報價，其中 16 檔有 Forward PE 數據"
+    "📊 設備/DRAM PE Ratio ↑ 8.20x (週變動 +0.97)",
+    "🟠 台灣 DRAM 溢價 405%（罕見訊號）",
+    "📥 本週成功取得 15 檔即時報價，其中 15 檔有 Forward PE 數據"
   ]
 }
